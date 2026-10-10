@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="爆弾とアイテムで戦うブラウザゲーム。PC・携帯に対応。2人対戦と全100ステージのCPUストーリーモードを遊べます。">
+<meta name="theme-color" content="#131918">
+<meta property="og:title" content="BOMB DUEL — ふたりのボム対戦">
+<meta property="og:description" content="PCでも携帯でも。2人対戦、または全100ステージのCPUに挑戦しよう。">
+<meta property="og:type" content="website">
+<title>BOMB DUEL — ふたりのボム対戦</title>
+<style>
+:root{--bg:#131918;--panel:#1d2422;--line:#35403b;--ink:#f4f1e5;--muted:#a5aea3;--lime:#d7ed86;--blue:#8ad7ed;--pink:#f5a8bd}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif}button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--blue);outline-offset:4px}.shell{max-width:1240px;margin:auto;padding:30px 36px 22px}header{display:flex;align-items:center;justify-content:space-between;padding-bottom:25px;border-bottom:1px solid var(--line)}.brand{font-size:19px;letter-spacing:2px;font-weight:900;display:flex;align-items:center;gap:12px}.brand svg{width:30px;height:30px}.edition{font-size:10px;letter-spacing:2px;color:var(--muted);border:1px solid var(--line);padding:7px 10px;border-radius:5px}.header-actions{display:flex;gap:10px}.subtle{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:9px 13px;font-size:12px}.subtle:hover{background:#2c3630}.intro{display:flex;justify-content:space-between;align-items:end;padding:27px 0 23px}.eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--lime);margin:0 0 9px}h1{font-size:clamp(24px,3.1vw,38px);letter-spacing:-1px;line-height:1.3;margin:0}.intro p.description{font-size:12px;color:var(--muted);line-height:1.8;margin:10px 0 0}.rule-pill{white-space:nowrap;border-radius:30px;border:1px solid var(--line);padding:9px 14px;color:var(--muted);font-size:11px}.rule-pill span{color:var(--lime);margin-right:5px}.layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:22px}.sidebar{display:flex;flex-direction:column;gap:13px}.player-card{border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:17px}.player-top{display:flex;align-items:center;gap:11px;margin-bottom:17px}.avatar{width:38px;height:38px;border-radius:11px;background:var(--blue);display:grid;place-items:center;color:#172925;font-size:18px;font-weight:900;box-shadow:inset 0 -4px #0002}.p2 .avatar{background:var(--pink)}.player-name{font-size:12px;font-weight:800;letter-spacing:1px}.player-label{font-size:10px;color:var(--muted);margin-top:4px}.stat{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);padding:6px 0}.stat strong{color:var(--ink);font-weight:650}.stat .blue{color:var(--blue)}.stat .pink{color:var(--pink)}.controls{border-top:1px solid var(--line);padding-top:12px;margin-top:9px;font-size:10px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:4px}kbd{display:inline-block;font:600 10px ui-monospace,monospace;background:#303a34;border:1px solid #4c574e;border-bottom-width:2px;border-radius:4px;padding:4px 5px;color:var(--ink)}.notes{padding:4px 2px;font-size:11px;line-height:1.9;color:var(--muted)}.notes b{color:var(--lime);font-weight:500}.arena-panel{border:1px solid var(--line);background:var(--panel);border-radius:16px;overflow:hidden}.arena-bar{display:flex;justify-content:space-between;align-items:center;padding:13px 18px;border-bottom:1px solid var(--line);font-size:10px;letter-spacing:1.5px}.live{display:flex;gap:7px;align-items:center}.dot{width:6px;height:6px;background:var(--lime);border-radius:50%}.arena-status{color:var(--muted);letter-spacing:0;font-size:11px}.board-wrap{position:relative;padding:18px;isolation:isolate}canvas{display:block;width:100%;height:auto;border-radius:9px;background:#a1ac85;touch-action:none}.overlay{position:absolute;inset:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:#14221cd9;backdrop-filter:blur(4px);z-index:2;padding:18px}.overlay[hidden]{display:none}.modal{text-align:center;max-width:365px}.modal-icon{height:52px;display:grid;place-items:center;font-size:36px;margin-bottom:10px}.modal .eyebrow{margin-bottom:12px}h2{font-size:32px;letter-spacing:-1px;margin:0 0 14px}.modal p{font-size:12px;line-height:1.9;color:#c6cec1;margin:0 0 24px}.primary{background:var(--lime);color:#17221b;border:0;border-radius:9px;font-size:13px;font-weight:800;padding:13px 28px;box-shadow:0 4px 0 #819b4a}.primary:hover{background:#e6f7aa}.primary:active{transform:translateY(2px);box-shadow:0 2px 0 #819b4a}.modal-hint{margin-top:15px;font-size:10px;color:var(--muted)}.arena-footer{display:flex;justify-content:space-between;gap:8px;padding:0 18px 15px;font-size:10px;color:var(--muted)}.drop-progress{display:inline-block;width:62px;height:4px;border-radius:3px;background:#3a443a;overflow:hidden;vertical-align:middle;margin-right:8px}.drop-progress i{display:block;height:100%;background:var(--lime);width:0}.legend{margin-top:21px;padding-top:19px;border-top:1px solid var(--line);display:grid;grid-template-columns:130px repeat(4,1fr);gap:16px;align-items:center}.legend-heading{font-size:11px;font-weight:750;letter-spacing:.5px}.legend-heading small{display:block;color:var(--muted);font-size:9px;font-weight:400;margin-top:5px;letter-spacing:1px}.item{display:flex;align-items:center;gap:10px}.item-icon{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font-size:17px;font-weight:900;color:#20291e;flex-shrink:0}.flame{background:#ffc779}.speed{background:var(--blue)}.slow{background:#c7b4eb}.capacity{background:var(--pink)}.item-name{font-size:11px;font-weight:650}.item-desc{font-size:9px;margin-top:4px;color:var(--muted)}footer{display:flex;justify-content:space-between;margin-top:22px;color:#798477;font-size:9px;letter-spacing:1px}.touch-controls{display:none;justify-content:space-between;padding:12px 18px;gap:12px}.touch-group{display:grid;grid-template-columns:repeat(3,36px);gap:4px}.touch-group button{border:1px solid var(--line);border-radius:6px;background:#35423b;color:var(--blue);height:34px;touch-action:none;user-select:none;-webkit-user-select:none}.touch-group.p2 button{color:var(--pink)}.touch-group [data-dir="up"]{grid-column:2}.touch-group .bomb-key{grid-column:1 / 4;width:100%;font-size:11px}.toast{color:var(--lime);min-height:14px;max-width:55%;text-align:right}.game-live .overlay{display:none}
+@media(max-width:850px){.shell{padding:22px}.layout{grid-template-columns:170px minmax(0,1fr);gap:14px}.player-card{padding:13px}.legend{grid-template-columns:repeat(4,1fr);gap:10px}.legend-heading{grid-column:1/-1}.intro{align-items:start}.rule-pill{display:none}.controls{flex-wrap:wrap}.board-wrap{padding:12px}.overlay{inset:12px}}
+@media(max-width:620px){.shell{padding:16px 12px}.edition{display:none}header{padding-bottom:16px}.brand{font-size:15px;letter-spacing:1px}.intro{padding:21px 0 17px}.intro p.description{font-size:11px}.layout{display:flex;flex-direction:column;gap:12px}.sidebar{display:grid;grid-template-columns:1fr 1fr;gap:10px}.player-card{padding:12px}.player-top{margin-bottom:7px}.stat{padding:3px 0}.notes{grid-column:1/-1;padding:0;text-align:center;font-size:10px}.controls{font-size:9px;justify-content:start;gap:5px}.arena-bar{padding:12px;font-size:9px}.arena-footer{font-size:9px;padding:0 12px 12px}.legend{grid-template-columns:1fr 1fr;margin-top:17px}.touch-controls{display:flex}.modal p{margin-bottom:14px;font-size:11px}h2{font-size:25px}.modal-icon{display:none}.modal-hint{margin-top:10px}.modal .eyebrow{margin-bottom:8px}.header-actions{gap:6px}.subtle{padding:8px;font-size:10px}footer{letter-spacing:0}.toast{max-width:48%}}
+/* Device selection, rather than viewport size, controls the input UI. */
+.touch-controls{display:none!important}body[data-device="mobile"] .touch-controls{display:flex!important;flex-direction:column;gap:14px;padding:12px 16px 18px}body[data-device="mobile"] .controls{display:none}body[data-device="mobile"] .notes{font-size:10px}body[data-mode="story"] .p2-input{display:none!important}.touch-row{display:flex;align-items:center;justify-content:space-between;gap:16px}.dpad{width:142px;height:142px;display:grid;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:5px}.dpad button{font-size:22px;border:1px solid #647866;border-radius:12px;background:#35483d;color:var(--blue);touch-action:none;user-select:none;-webkit-user-select:none}.dpad button:active,.dpad button.active{background:var(--blue);color:#152b24}.dpad [data-dir="up"]{grid-area:1/2}.dpad [data-dir="left"]{grid-area:2/1}.dpad [data-dir="right"]{grid-area:2/3}.dpad [data-dir="down"]{grid-area:3/2}.pad-center{grid-area:2/2;display:grid;place-items:center;font-size:11px;color:var(--blue)}.p2-input .dpad button,.p2-input .pad-center{color:var(--pink)}.bomb-touch{width:94px;height:94px;border:2px solid #e5efa6;border-radius:50%;background:var(--lime);color:#1c2d22;box-shadow:0 6px 0 #738a46;touch-action:none;user-select:none;-webkit-user-select:none;display:flex;flex-direction:column;justify-content:center;align-items:center;font-weight:850;gap:2px}.bomb-touch span{font-size:32px}.bomb-touch small{font-size:12px}.bomb-touch:active{transform:translateY(3px);box-shadow:0 3px 0 #738a46}.p2-input .bomb-touch{background:var(--pink);border-color:#ffd8e3;box-shadow:0 6px 0 #a46478}.menu-bar{border-bottom:1px solid var(--line);padding:12px 0;display:flex;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px}.menu-bar label{display:flex;align-items:center;gap:7px;color:var(--muted)}select{max-width:100%;font:inherit;font-weight:650;padding:9px 10px;background:#29372e;border:1px solid #536248;color:var(--ink);border-radius:7px}select:focus-visible{outline:3px solid var(--blue)}#menu-panel{display:none;gap:14px;flex-wrap:wrap;align-items:center}#menu-panel.open{display:flex}#menu-summary{margin-left:auto;color:var(--lime);font-size:10px}.story-select[hidden]{display:none}.chapter-strip{margin-top:12px;padding:12px 15px;background:#222f24;border:1px solid #4c5f3d;border-radius:9px;display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#dcebb9}.chapter-strip[hidden]{display:none}.chapter-strip small{color:var(--muted)}body[data-device="mobile"] .intro{padding:16px 0 12px}body[data-device="mobile"] h1{font-size:24px}body[data-device="mobile"] .description{display:none}body[data-device="mobile"] .sidebar{display:grid;grid-template-columns:1fr 1fr}body[data-device="mobile"] .layout{display:flex;flex-direction:column;gap:10px}body[data-device="mobile"] .player-card{padding:10px}body[data-device="mobile"] .player-top{margin-bottom:6px}body[data-device="mobile"] .stat{padding:2px 0}body[data-device="mobile"] .notes{display:none}body[data-device="mobile"] .legend{margin-top:12px}body[data-device="mobile"] .avatar{width:30px;height:30px}body[data-device="mobile"] .board-wrap{padding:9px}body[data-device="mobile"] .overlay{inset:9px}
+@media(max-width:620px){.menu-bar{gap:8px}#menu-panel{width:100%;gap:9px}#menu-panel label{flex:1;min-width:130px}.chapter-strip{font-size:10px}body[data-device="mobile"] .intro h1{font-size:20px}.touch-row{padding:0 5px}.modal-hint{font-size:9px}.player-label{font-size:9px}.menu-bar label select{font-size:11px}.legend{margin-bottom:20px}}
+@media(max-width:620px){body[data-device="mobile"] .shell{padding-top:10px}body[data-device="mobile"] header{padding-bottom:11px}body[data-device="mobile"] .intro{display:none}body[data-device="mobile"] .menu-bar{padding:8px 0;margin-bottom:9px}body[data-device="mobile"] .chapter-strip{margin-top:0;margin-bottom:9px;padding:8px 10px}body[data-device="mobile"] .player-card{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:9px}body[data-device="mobile"] .player-top{grid-column:1/-1;margin-bottom:0;gap:7px}body[data-device="mobile"] .player-label{display:none}body[data-device="mobile"] .player-name{font-size:10px}body[data-device="mobile"] .stat{flex-direction:column;align-items:start;gap:2px;font-size:10px}body[data-device="mobile"] .avatar{height:24px;width:24px;font-size:14px}body[data-device="mobile"] .arena-bar{padding:10px 12px}body[data-device="mobile"] .touch-controls{padding-top:8px;padding-bottom:14px}body[data-device="mobile"][data-mode="duel"] .dpad{width:116px;height:116px;grid-template-columns:repeat(3,36px);grid-template-rows:repeat(3,36px);gap:4px}body[data-device="mobile"][data-mode="duel"] .bomb-touch{width:82px;height:82px}}
+</style>
+</head>
+<body>
+<main class="shell">
+<header><div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M21 7l4-4m-1 7 5-1m-6-3 1-5" stroke="#d7ed86" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="19" r="11" fill="#d7ed86"/><path d="M10 12a7 7 0 0 0-3 5" stroke="#131918" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="17" y="7" width="6" height="5" rx="1" fill="#d7ed86" transform="rotate(30 20 10)"/></svg>BOMB DUEL <span class="edition">LOCAL MULTIPLAYER / 01</span></div><div class="header-actions"><button class="subtle" id="sound" aria-pressed="false">サウンド OFF</button><button class="subtle" id="restart">リセット ↻</button></div></header>
+<nav class="menu-bar" aria-label="ゲームメニュー"><button class="subtle" id="menu-toggle" aria-expanded="false" aria-controls="menu-panel">☰ メニュー</button><div id="menu-panel"><label>操作端末 <select id="device-select" aria-label="操作端末"><option value="pc">PC / キーボード</option><option value="mobile">携帯 / タッチ</option></select></label><label>遊び方 <select id="mode-select" aria-label="遊び方"><option value="duel">2人で対戦</option><option value="story">1人 / ストーリー</option></select></label><label class="story-select" id="stage-label" hidden>ステージ <select id="stage-select" aria-label="ステージ選択"></select></label></div><span id="menu-summary">2人対戦 · PC</span></nav>
+<div class="chapter-strip" id="chapter-strip" hidden><span id="chapter-title"></span><small id="chapter-progress"></small></div>
+<div class="intro"><div><p class="eyebrow" id="intro-tag">SMALL STAGE. BIG EXPLOSIONS.</p><h1>ひとつの爆弾から、勝負が始まる。</h1><p class="description" id="description">ふたりで遊ぶ、ちいさなボム対戦。アイテムを拾って、相手の逃げ道をふさごう。</p></div><div class="rule-pill" id="rule-pill"><span>●</span> 2 PLAYERS · SAME KEYBOARD</div></div>
+<div class="layout">
+<aside class="sidebar">
+<section class="player-card p1"><div class="player-top"><div class="avatar">1</div><div><div class="player-name">PLAYER 01</div><div class="player-label">シアン / 左上スタート</div></div></div><div class="stat">爆弾 <strong class="blue" id="p1-bombs">1 / 1</strong></div><div class="stat">爆風 <strong id="p1-range">2 マス</strong></div><div class="stat">スピード <strong id="p1-speed">1.0 ×</strong></div><div class="controls"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>移動</span></div><div class="controls" style="border:0;margin-top:0;padding-top:8px"><kbd>SPACE</kbd><span>爆弾を置く</span></div></section>
+<section class="player-card p2"><div class="player-top"><div class="avatar" id="p2-avatar">2</div><div><div class="player-name" id="p2-name">PLAYER 02</div><div class="player-label" id="p2-label">ピンク / 右下スタート</div></div></div><div class="stat">爆弾 <strong class="pink" id="p2-bombs">1 / 1</strong></div><div class="stat">爆風 <strong id="p2-range">2 マス</strong></div><div class="stat">スピード <strong id="p2-speed">1.0 ×</strong></div><div class="controls p2-input"><span><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></span><span>移動</span></div><div class="controls p2-input" style="border:0;margin-top:0;padding-top:8px"><kbd>ENTER</kbd><span>爆弾を置く</span></div></section>
+<div class="notes">爆弾は<b>2秒</b>で爆発。<br>自分の爆風にも気をつけて。<br><kbd>P</kbd> 一時停止 · <kbd>R</kbd> リセット</div>
+</aside>
+<section class="arena-panel" aria-label="対戦ステージ">
+<div class="arena-bar"><div class="live"><span class="dot"></span>THE GARDEN <span style="color:#758270">/ 13 × 11</span></div><span class="arena-status" id="status">READY TO PLAY</span></div>
+<div class="board-wrap"><canvas id="game" width="832" height="704" role="img" aria-label="ボム対戦ステージ。プレイヤー1はWASDとスペース、プレイヤー2は矢印とEnterで操作します。"></canvas><div class="overlay" id="overlay"><div class="modal"><div class="modal-icon">✹</div><p class="eyebrow" id="modal-tag">LET'S PLAY TOGETHER</p><h2 id="modal-title">ふたり、準備はいい？</h2><p id="modal-text">相手に爆風を当てたら勝ち。<br>木箱を壊し、ランダムに届くアイテムで強くなろう。<br>最初はそれぞれ、爆弾ひとつ。</p><button class="primary" id="start">対戦をはじめる →</button><div class="modal-hint" id="modal-hint">同じキーボードで遊べます</div></div></div></div>
+<div class="arena-footer"><span><span class="drop-progress"><i id="drop-fill"></i></span><span id="drop-label">アイテムが空から届きます</span></span><span class="toast" id="toast" aria-live="polite"></span></div>
+<div class="touch-controls" aria-label="タッチ操作"><div class="touch-row"><div class="dpad"><button data-player="0" data-dir="up" aria-label="プレイヤー1 上">↑</button><button data-player="0" data-dir="left" aria-label="プレイヤー1 左">←</button><span class="pad-center">P1</span><button data-player="0" data-dir="down" aria-label="プレイヤー1 下">↓</button><button data-player="0" data-dir="right" aria-label="プレイヤー1 右">→</button></div><button class="bomb-touch" data-player="0" data-bomb="1" aria-label="プレイヤー1 爆弾を置く"><span>✹</span><small>爆弾を置く</small></button></div><div class="touch-row p2-input"><div class="dpad"><button data-player="1" data-dir="up" aria-label="プレイヤー2 上">↑</button><button data-player="1" data-dir="left" aria-label="プレイヤー2 左">←</button><span class="pad-center">P2</span><button data-player="1" data-dir="down" aria-label="プレイヤー2 下">↓</button><button data-player="1" data-dir="right" aria-label="プレイヤー2 右">→</button></div><button class="bomb-touch" data-player="1" data-bomb="1" aria-label="プレイヤー2 爆弾を置く"><span>✹</span><small>爆弾を置く</small></button></div></div>
+</section>
+</div>
+<div class="legend"><div class="legend-heading">空からの贈りもの<small>RANDOM ITEM DROPS</small></div><div class="item"><div class="item-icon flame">✹</div><div><div class="item-name">火力アップ</div><div class="item-desc">爆風が1マス伸びる</div></div></div><div class="item"><div class="item-icon speed">»</div><div><div class="item-name">スピードアップ</div><div class="item-desc">移動速度 +20%</div></div></div><div class="item"><div class="item-icon slow">≈</div><div><div class="item-name">スピードダウン</div><div class="item-desc">移動速度 −20%</div></div></div><div class="item"><div class="item-icon capacity">+</div><div><div class="item-name">爆弾ストック</div><div class="item-desc">同時に置ける数 +1</div></div></div></div>
+<footer><span>BOMB DUEL / PLAYABLE PROTOTYPE</span><span>火力 最大6 · 爆弾 最大5 · スピード 0.6〜2.0倍</span></footer>
+</main>
+<script>
+'use strict';
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
+const W=13,H=11,T=64,FUSE=2,FIRE_TIME=.65,DROP_INTERVAL=60;
+const $=id=>document.getElementById(id);
+const dirs={up:[0,-1],left:[-1,0],down:[0,1],right:[1,0]};
+const bindings=[{KeyW:'up',KeyA:'left',KeyS:'down',KeyD:'right'},{ArrowUp:'up',ArrowLeft:'left',ArrowDown:'down',ArrowRight:'right'}];
+const itemTypes=['range','speed','slow','capacity'];
+const itemMeta={range:{color:'#ffc779',symbol:'✹',name:'火力アップ'},speed:{color:'#8ad7ed',symbol:'»',name:'スピードアップ'},slow:{color:'#c7b4eb',symbol:'≈',name:'スピードダウン'},capacity:{color:'#f5a8bd',symbol:'+',name:'爆弾ストック'}};
+let grid,players,bombs,fire,items,particles,held=[[],[]],phase='ready',elapsed=0,dropClock=0,toastClock=0,last=0,soundOn=false,audioContext=null,round=1;
+let mode='duel',device=window.matchMedia?.('(pointer: coarse)').matches?'mobile':'pc',stage=1,unlocked=1,completed=false,advanceStage=false,cpuClock=0,cpuBombClock=0;
+try{const prefs=JSON.parse(localStorage.getItem('bomb-duel-settings-v2'));if(prefs){if(['duel','story'].includes(prefs.mode))mode=prefs.mode;if(['pc','mobile'].includes(prefs.device))device=prefs.device;}}catch{}
+try{const saved=JSON.parse(localStorage.getItem('bomb-duel-story-v2'));if(saved){unlocked=Math.max(1,Math.min(100,Math.trunc(Number(saved.unlocked))||1));stage=unlocked;completed=Boolean(saved.completed);}}catch{}
+const chapters=[['はじまりの庭','爆弾を置いたら、その場を離れよう。'],['木箱の小道','木箱を壊して、道をひらこう。'],['風の広場','CPUが爆風をよけ始める。'],['古い城門','相手の逃げ道を見きわめよう。'],['砂の迷宮','アイテムを狙うCPUに先回り。'],['夕暮れの砦','CPUの爆弾ストックが増える。'],['氷の回廊','CPUが安全な退路を探す。'],['星の工房','連鎖爆発に気をつけよう。'],['影の宮殿','CPUが次の動きを読み始める。'],['最後の庭','最強のCPUに挑もう。']];
+function difficulty(n=stage){if(n<=3)return {speed:.6+n*.05,range:1,capacity:1,think:1.45-n*.1,bombGap:24-n*2,escape:0,attack:.12,density:0};const t=(n-4)/96;return {speed:.8+t*.65,range:2+Math.floor(t*3),capacity:1+Math.floor(t*2),think:.72-t*.56,bombGap:5-t*3.6,escape:.35+t*.65,attack:.35+t*.65,density:.2+t*.35};}
+function saveProgress(){try{localStorage.setItem('bomb-duel-story-v2',JSON.stringify({unlocked,completed}));}catch{}}
+function saveSettings(){try{localStorage.setItem('bomb-duel-settings-v2',JSON.stringify({mode,device}));}catch{}}
+function syncMenu(){
+	document.body.dataset.device=device;document.body.dataset.mode=mode;$('device-select').value=device;$('mode-select').value=mode;
+	$('stage-label').hidden=mode!=='story';$('chapter-strip').hidden=mode!=='story';$('menu-summary').textContent=`${mode==='story'?`ストーリー ${stage}/100`:'2人対戦'} · ${device==='mobile'?'携帯':'PC'}`;
+	$('p2-name').textContent=mode==='story'?'CPU OPPONENT':'PLAYER 02';$('p2-avatar').textContent=mode==='story'?'C':'2';$('p2-label').textContent=mode==='story'?`CPU Lv.${stage} / ${stage<=3?'とてもかんたん':stage<=20?'かんたん':stage<=50?'ふつう':stage<=80?'つよい':'とてもつよい'}`:'ピンク / 右下スタート';
+	$('chapter-title').textContent=`第${Math.ceil(stage/10)}章 · ${chapters[Math.floor((stage-1)/10)][0]}`;$('chapter-progress').textContent=`STAGE ${stage} / 100 · ${completed?'全ステージクリア':`解放 ${unlocked}/100`}`;
+	$('description').textContent=mode==='story'?'CPUを倒して、全100ステージの旅へ。最初の3ステージは練習向け。':'ふたりで遊ぶ、ちいさなボム対戦。アイテムを拾って、相手の逃げ道をふさごう。';
+	canvas.setAttribute('aria-label',device==='mobile'?'ボム対戦ステージ。左のパッドで移動、右のボタンで爆弾を置きます。':mode==='story'?'CPU対戦ステージ。WASDで移動、スペースで爆弾を置きます。':'ボム対戦ステージ。プレイヤー1はWASDとスペース、プレイヤー2は矢印とEnterで操作します。');
+	$('rule-pill').textContent=mode==='story'?`STORY · STAGE ${stage} / 100`:`2 PLAYERS · ${device==='mobile'?'TOUCH':'SAME KEYBOARD'}`;
+	$('stage-select').innerHTML=Array.from({length:100},(_,i)=>`<option value="${i+1}" ${i+1>unlocked?'disabled':''}>${i+1>unlocked?'🔒 ':''}ステージ ${i+1}${i<3?' · 練習':''}</option>`).join('');$('stage-select').value=String(stage);
+}
+function rand(n){return Math.floor(Math.random()*n)}
+function at(x,y){return `${x},${y}`}
+function makeStage(){
+	let seed=stage*9173+41;const random=mode==='story'?()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;}:Math.random;
+	grid=Array.from({length:H},(_,y)=>Array.from({length:W},(_,x)=>x===0||y===0||x===W-1||y===H-1||(x%2===0&&y%2===0)?1:0));
+	for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){
+		const safe=(x<=3&&y===1)||(x===1&&y<=3)||(x>=W-4&&y===H-2)||(x===W-2&&y>=H-4);
+		// The central row and column stay open so both sides are always connected.
+		if(grid[y][x]===0&&!safe&&x!==7&&y!==5&&random()<(mode==='story'?difficulty().density:.52))grid[y][x]=2;
+	}
+}
+function reset(){
+	makeStage();players=[{id:0,x:1,y:1,fromX:1,fromY:1,color:'#8ad7ed',range:2,capacity:1,speed:1,cooldown:0,moveTime:.18,alive:true},{id:1,x:11,y:9,fromX:11,fromY:9,color:'#f5a8bd',range:2,capacity:1,speed:1,cooldown:0,moveTime:.18,alive:true}];
+	if(mode==='story'){const d=difficulty();Object.assign(players[1],{speed:d.speed,range:d.range,capacity:d.capacity});if(stage<=3){players[1].x=5;players[1].y=1;players[1].fromX=5;players[1].fromY=1;}}
+	bombs=[];fire=new Map();items=[];particles=[];held=[[],[]];elapsed=0;dropClock=0;toastClock=0;phase='ready';cpuClock=0;cpuBombClock=0;advanceStage=false;$('toast').textContent='';$('status').textContent=mode==='story'?`STAGE ${stage} / 100`:'READY TO PLAY';syncMenu();
+	const hint=device==='mobile'?'左のパッドで移動 · 右のボタンで爆弾':'P1: WASD + SPACE · P2: 矢印 + ENTER';
+	if(mode==='story')showModal(`CHAPTER ${Math.ceil(stage/10)} / ${chapters[Math.floor((stage-1)/10)][0]}`,`ステージ ${stage} / 100`,`${chapters[Math.floor((stage-1)/10)][1]}<br>${stage<=3?'ゆっくり動くCPUと練習。CPUの爆弾はしばらく出ません。':'CPUを倒すと、次のステージへ進めます。'}<br>アイテムは60秒に1個届きます。`,'ステージに挑戦 →',hint);
+	else showModal("LET'S PLAY TOGETHER",'ふたり、準備はいい？','相手に爆風を当てたら勝ち。<br>最初はそれぞれ、爆弾ひとつ。<br>アイテムは60秒に1個届きます。','対戦をはじめる →',hint);updateHud();
+}
+function showModal(tag,title,text,button,hint){$('modal-tag').textContent=tag;$('modal-title').textContent=title;$('modal-text').innerHTML=text;$('start').textContent=button;$('modal-hint').textContent=hint;$('overlay').hidden=false;}
+function start(){
+	if(phase==='finished'){if(mode==='story'&&advanceStage)stage=Math.min(100,stage+1);else if(mode==='duel')round++;reset();}
+	$('menu-panel').classList.remove('open');$('menu-toggle').setAttribute('aria-expanded','false');
+	phase='playing';$('overlay').hidden=true;$('status').textContent=`ROUND ${String(round).padStart(2,'0')} · 00:00`;held=[[],[]];unlockAudio();tone(440,.08);updateHud();
+}
+function pause(){
+	if(phase==='playing'){phase='paused';held=[[],[]];$('status').textContent='PAUSED';showModal('TAKE A BREATH','ちょっとひと休み。',`爆弾のタイマーも一時停止中。<br>${mode==='story'?'準備ができたら、続きをどうぞ。':'ふたりの準備ができたら、続きをどうぞ。'}`,'対戦に戻る →',device==='mobile'?'ボタンをタッチして再開できます':'P キーでも再開できます');}
+	else if(phase==='paused'){phase='playing';$('overlay').hidden=true;$('menu-panel').classList.remove('open');$('menu-toggle').setAttribute('aria-expanded','false');}
+}
+function unlockAudio(){if(soundOn){try{audioContext??=new(window.AudioContext||window.webkitAudioContext)();audioContext.resume();}catch{soundOn=false;}}}
+function tone(freq,duration=.1,type='sine',volume=.07){if(!soundOn||!audioContext)return;const osc=audioContext.createOscillator(),gain=audioContext.createGain();osc.type=type;osc.frequency.setValueAtTime(freq,audioContext.currentTime);gain.gain.setValueAtTime(volume,audioContext.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+duration);osc.connect(gain);gain.connect(audioContext.destination);osc.start();osc.stop(audioContext.currentTime+duration);}
+function blocked(x,y){return !grid[y]||grid[y][x]!==0||bombs.some(b=>b.x===x&&b.y===y)||players.some(p=>p.alive&&p.x===x&&p.y===y);}
+function movePlayer(p,dt){
+	p.cooldown=Math.max(0,p.cooldown-dt);if(p.cooldown>0)return;
+	const direction=held[p.id].at(-1);if(!direction)return;const [dx,dy]=dirs[direction],x=p.x+dx,y=p.y+dy;
+	if(blocked(x,y))return;
+	p.fromX=p.x;p.fromY=p.y;p.x=x;p.y=y;p.moveTime=.18/p.speed;p.cooldown=p.moveTime;collect(p);
+}
+function placeBomb(id){
+	if(phase!=='playing')return;const p=players[id];
+	if(!p.alive||bombs.filter(b=>b.owner===id).length>=p.capacity||bombs.some(b=>b.x===p.x&&b.y===p.y))return;
+	bombs.push({x:p.x,y:p.y,owner:id,range:p.range,time:FUSE});tone(180,.09,'triangle');updateHud();
+}
+function blastCells(b){
+	const cells=[[b.x,b.y]];for(const [dx,dy] of Object.values(dirs))for(let r=1;r<=b.range;r++){const x=b.x+dx*r,y=b.y+dy*r;if(!grid[y]||grid[y][x]===undefined||grid[y][x]===1)break;cells.push([x,y]);if(grid[y][x]===2)break;}return cells;
+}
+function dangerMap(extra){
+	const list=extra?[...bombs,extra]:bombs, times=list.map(b=>b.time),footprints=list.map(blastCells);
+	// Propagate early detonation through chain reactions before planning a route.
+	for(let pass=0;pass<list.length;pass++)for(let i=0;i<list.length;i++)for(let j=0;j<list.length;j++)if(times[j]>times[i]&&footprints[i].some(([x,y])=>list[j].x===x&&list[j].y===y))times[j]=times[i];
+	const danger=new Map();for(const key of fire.keys())danger.set(key,0);for(let i=0;i<list.length;i++)for(const [x,y] of footprints[i])danger.set(at(x,y),Math.min(danger.get(at(x,y))??Infinity,times[i]));return danger;
+}
+function cpuRoutes(danger,extra){
+	const p=players[1],stepTime=Math.max(.18/p.speed,difficulty().think),queue=[{x:p.x,y:p.y,first:null,steps:0}],seen=new Set([at(p.x,p.y)]),result=[];
+	for(let q=0;q<queue.length;q++){
+		const node=queue[q];result.push(node);for(const [direction,[dx,dy]] of Object.entries(dirs)){
+			const x=node.x+dx,y=node.y+dy,key=at(x,y);if(seen.has(key)||!grid[y]||grid[y][x]!==0||bombs.some(b=>b.x===x&&b.y===y)||(extra&&extra.x===x&&extra.y===y)||players.some(other=>other.id!==1&&other.alive&&other.x===x&&other.y===y))continue;
+			const arrival=(node.steps+1)*stepTime,detonation=danger.get(key);
+			if(fire.has(key)||(detonation!==undefined&&arrival>=detonation-.18))continue;
+			seen.add(key);queue.push({x,y,first:node.first??direction,steps:node.steps+1});
+		}
+	}return result;
+}
+function updateCPU(dt){
+	if(mode!=='story'||!players[1].alive)return;cpuClock-=dt;cpuBombClock+=dt;if(cpuClock>0)return;
+	const cpu=players[1],target=players[0],d=difficulty();cpuClock=d.think;held[1]=[];
+	const danger=dangerMap(),routes=cpuRoutes(danger),safe=routes.filter(n=>!danger.has(at(n.x,n.y))),escape=safe.filter(n=>n.first).sort((a,b)=>a.steps-b.steps)[0];
+	if(danger.has(at(cpu.x,cpu.y))&&escape&&Math.random()<d.escape){hold(1,escape.first);return;}
+	if(stage<=3){
+		// Training opponents hesitate, approach slowly, and never anticipate a blast.
+		if(elapsed>4&&Math.random()<.65){const adjacent=routes.filter(n=>n.steps===1);adjacent.sort((a,b)=>(Math.abs(a.x-target.x)+Math.abs(a.y-target.y))-(Math.abs(b.x-target.x)+Math.abs(b.y-target.y)));if(adjacent[0])hold(1,adjacent[0].first);}
+		if(cpuBombClock>=d.bombGap&&Math.random()<.12){placeBomb(1);cpuBombClock=0;}return;
+	}
+	const proposed={x:cpu.x,y:cpu.y,range:cpu.range,time:FUSE,owner:1},cells=blastCells(proposed);
+	const anticipates=stage>=80,tx=target.x+(anticipates?Math.sign(target.x-target.fromX):0),ty=target.y+(anticipates?Math.sign(target.y-target.fromY):0);
+	const attacks=cells.some(([x,y])=>(x===target.x&&y===target.y)||(anticipates&&x===tx&&y===ty)),opensPath=cells.some(([x,y])=>grid[y][x]===2);
+	if(cpuBombClock>=d.bombGap&&(attacks||opensPath)&&bombs.filter(b=>b.owner===1).length<cpu.capacity&&!bombs.some(b=>b.x===cpu.x&&b.y===cpu.y)&&Math.random()<d.attack){
+		const future=dangerMap(proposed),refuge=cpuRoutes(future,proposed).filter(n=>n.first&&!future.has(at(n.x,n.y))).sort((a,b)=>a.steps-b.steps)[0];
+		if(refuge){placeBomb(1);cpuBombClock=0;hold(1,refuge.first);return;}
+	}
+	let gx=target.x,gy=target.y;if(stage>=35){const loot=items.filter(i=>i.type!=='slow'&&i.fall<=0).sort((a,b)=>(Math.abs(a.x-cpu.x)+Math.abs(a.y-cpu.y))-(Math.abs(b.x-cpu.x)+Math.abs(b.y-cpu.y)))[0];if(loot&&Math.abs(loot.x-cpu.x)+Math.abs(loot.y-cpu.y)<8){gx=loot.x;gy=loot.y;}}
+	const options=(safe.length?safe:routes).filter(n=>n.first).sort((a,b)=>(Math.abs(a.x-gx)+Math.abs(a.y-gy)+a.steps*.12)-(Math.abs(b.x-gx)+Math.abs(b.y-gy)+b.steps*.12));
+	if(options[0])hold(1,options[0].first);
+}
+function burst(x,y,color,count=12){for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,v=35+Math.random()*150;particles.push({x:(x+.5)*T,y:(y+.5)*T,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:.5,max:.5,color,size:2+Math.random()*5});}}
+function explode(initial){
+	const queue=[initial];
+	while(queue.length){
+		const b=queue.shift();if(!bombs.includes(b))continue;bombs.splice(bombs.indexOf(b),1);
+		const ignite=(x,y)=>{fire.set(at(x,y),FIRE_TIME);items=items.filter(i=>i.x!==x||i.y!==y);for(const other of bombs)if(other.x===x&&other.y===y&&!queue.includes(other))queue.push(other);burst(x,y,'#ffcd67',5);};
+		ignite(b.x,b.y);
+		for(const [dx,dy] of Object.values(dirs))for(let r=1;r<=b.range;r++){
+			const x=b.x+dx*r,y=b.y+dy*r;if(!grid[y]||grid[y][x]===undefined||grid[y][x]===1)break;
+			const crate=grid[y][x]===2;ignite(x,y);if(crate){grid[y][x]=0;burst(x,y,'#ad764b',14);break;}
+		}
+	}
+	tone(70,.28,'sawtooth',.09);updateHud();
+}
+function dropItem(){
+	const free=[];for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++)if(grid[y][x]===0&&!bombs.some(b=>b.x===x&&b.y===y)&&!items.some(i=>i.x===x&&i.y===y)&&!fire.has(at(x,y))&&!players.some(p=>p.x===x&&p.y===y))free.push([x,y]);
+	if(!free.length||items.length>=12)return;const [x,y]=free[rand(free.length)];items.push({x,y,type:itemTypes[rand(4)],fall:.7});tone(620,.06,'sine',.035);
+}
+function collect(p){
+	const index=items.findIndex(i=>i.x===p.x&&i.y===p.y&&i.fall<=0);if(index<0)return;
+	const item=items.splice(index,1)[0];if(item.type==='range')p.range=Math.min(6,p.range+1);if(item.type==='capacity')p.capacity=Math.min(5,p.capacity+1);if(item.type==='speed')p.speed=Math.min(2,Math.round((p.speed+.2)*10)/10);if(item.type==='slow')p.speed=Math.max(.6,Math.round((p.speed-.2)*10)/10);
+	$('toast').textContent=`P${p.id+1} · ${itemMeta[item.type].name}`;toastClock=2.4;burst(p.x,p.y,itemMeta[item.type].color,10);tone(item.type==='slow'?220:880,.16,'triangle');updateHud();
+}
+function checkHits(){
+	const hit=players.filter(p=>p.alive&&fire.has(at(p.x,p.y)));if(!hit.length)return;
+	for(const p of hit){p.alive=false;burst(p.x,p.y,p.color,30);}phase='finished';held=[[],[]];
+	const winner=players.find(p=>p.alive);$('status').textContent=winner?`PLAYER 0${winner.id+1} WINS`:'DRAW';
+	if(mode==='story'){
+		advanceStage=Boolean(winner&&winner.id===0&&stage<100);if(winner?.id===0){unlocked=Math.max(unlocked,Math.min(100,stage+1));if(stage===100)completed=true;saveProgress();}syncMenu();
+		const cleared=winner?.id===0;$('status').textContent=cleared?`STAGE ${stage} CLEAR`:winner?'TRY AGAIN':'DRAW';
+		showModal(cleared?'STAGE CLEAR':'TRY AGAIN',cleared?(stage===100?'全100ステージ、クリア！':`ステージ ${stage} クリア！`):winner?'CPUに負けました':'引き分け！',cleared?(stage===100?'最後の庭に平和が戻りました。<br>メニューから好きなステージを再挑戦できます。':`次はステージ ${stage+1}。少しずつCPUが強くなります。<br>解放したステージは、このブラウザに保存されます。`):'爆弾を置いたら、曲がり角の向こうへ逃げよう。<br>同じステージで、もう一度挑戦できます。',advanceStage?'次のステージへ →':'もう一度挑戦 →','メニューから解放済みステージを選べます');
+	}else showModal('ROUND COMPLETE',winner?`PLAYER 0${winner.id+1} の勝ち！`:'引き分け！',winner?'相手に爆風がヒット。ナイスな一手でした。<br>新しいステージで、もう一度対戦しよう。':'同時に爆風に当たりました。<br>次のラウンドで決着をつけよう。','もう一度対戦 →','R キーでステージをリセット');tone(winner?660:330,.35,'triangle');updateHud();
+}
+function updateHud(){
+	for(const p of players){const id=`p${p.id+1}`;$(id+'-bombs').textContent=`${p.capacity-bombs.filter(b=>b.owner===p.id).length} / ${p.capacity}`;$(id+'-range').textContent=`${p.range} マス`;$(id+'-speed').textContent=`${p.speed.toFixed(1)} ×`;}
+	$('drop-fill').style.width=`${Math.min(100,dropClock/DROP_INTERVAL*100)}%`;$('drop-label').textContent=phase==='ready'?'アイテムは60秒に1個':`次のアイテムまで ${Math.max(0,Math.ceil(DROP_INTERVAL-dropClock))} 秒`;
+}
+function update(dt){
+	if(phase==='playing'){
+		elapsed+=dt;dropClock+=dt;toastClock-=dt;if(toastClock<=0)$('toast').textContent='';
+		for(const [key,time] of fire){if(time<=dt)fire.delete(key);else fire.set(key,time-dt);}
+		// Check existing fire before accepting a movement input; stepping off a live flame cannot dodge it.
+		checkHits();if(phase!=='playing')return;
+		updateCPU(dt);for(const p of players){movePlayer(p,dt);if(mode==='story'&&p.id===1&&p.cooldown>0)held[1]=[];}
+		for(const i of items)i.fall=Math.max(0,i.fall-dt);for(const p of players)collect(p);
+		for(const b of bombs)b.time-=dt;for(const b of [...bombs])if(b.time<=0)explode(b);
+		checkHits();if(phase==='playing'&&dropClock>=DROP_INTERVAL){dropClock-=DROP_INTERVAL;dropItem();}
+		const seconds=Math.floor(elapsed);if(phase==='playing')$('status').textContent=`${mode==='story'?`STAGE ${stage}/100`:`ROUND ${String(round).padStart(2,'0')}`} · ${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`;updateHud();
+	}
+	if(phase!=='paused'){for(const p of particles){p.life-=dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=230*dt;}particles=particles.filter(p=>p.life>0);}
+}
+function rounded(x,y,w,h,r,fill){ctx.fillStyle=fill;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill();}
+function drawTile(x,y,type){
+	const px=x*T,py=y*T;ctx.fillStyle=(x+y)%2?'#b4bd96':'#bcc59d';ctx.fillRect(px,py,T,T);ctx.fillStyle='#566d3912';ctx.fillRect(px+2,py+T-2,T-2,2);
+	if(type===1){rounded(px+3,py+7,58,54,8,'#52604d');rounded(px+3,py+2,58,51,7,'#748169');rounded(px+8,py+6,48,7,3,'#8a9678');ctx.fillStyle='#65715b';ctx.fillRect(px+5,py+26,54,3);ctx.fillRect(px+31,py+8,3,19);ctx.fillRect(px+16,py+30,3,21);}
+	if(type===2){rounded(px+6,py+11,52,48,5,'#76533e');rounded(px+6,py+5,52,48,5,'#bd9462');rounded(px+10,py+9,44,40,2,'#a67e51');ctx.strokeStyle='#dfb27c';ctx.lineWidth=5;ctx.strokeRect(px+11,py+10,42,38);ctx.beginPath();ctx.moveTo(px+13,py+12);ctx.lineTo(px+51,py+46);ctx.stroke();ctx.fillStyle='#704f36';for(const [dx,dy] of [[13,12],[51,12],[13,46],[51,46]]){ctx.beginPath();ctx.arc(px+dx,py+dy,2,0,Math.PI*2);ctx.fill();}}
+}
+function drawItem(item,t){
+	const m=itemMeta[item.type],cx=(item.x+.5)*T,base=(item.y+.5)*T,offset=item.fall>0?-90*(item.fall/.7):Math.sin(t*3+item.x)*3;
+	ctx.globalAlpha=.18;rounded(cx-18,base+16,36,9,8,'#203120');ctx.globalAlpha=1;
+	if(item.fall>0){ctx.strokeStyle='#f4f1e570';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(cx,base-70);ctx.lineTo(cx,base+10);ctx.stroke();ctx.setLineDash([]);}
+	rounded(cx-19,base-20+offset,38,38,9,'#52613c');rounded(cx-19,base-24+offset,38,37,9,m.color);rounded(cx-15,base-20+offset,30,4,2,'#ffffff55');ctx.fillStyle='#243028';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 30px system-ui';ctx.fillText(m.symbol,cx,base-4+offset);
+}
+function drawBomb(b,t){
+	const x=(b.x+.5)*T,y=(b.y+.5)*T,scale=1+Math.sin(t*(b.time<.7?24:10))*.045;
+	ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);rounded(-20,14,40,10,7,'#26352245');ctx.fillStyle='#25302d';ctx.beginPath();ctx.arc(0,-1,20,0,Math.PI*2);ctx.fill();ctx.fillStyle='#3c4b43';ctx.beginPath();ctx.arc(-7,-8,7,0,Math.PI*2);ctx.fill();rounded(-5,-27,10,9,3,'#25302d');ctx.strokeStyle='#dbc899';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,-25);ctx.quadraticCurveTo(2,-38,13,-32);ctx.stroke();ctx.fillStyle=b.time<.7?'#ff9a66':'#ffdb72';ctx.beginPath();ctx.arc(14,-32,4+Math.sin(t*25)*1.5,0,Math.PI*2);ctx.fill();ctx.fillStyle=players[b.owner].color;ctx.beginPath();ctx.arc(0,-1,4,0,Math.PI*2);ctx.fill();ctx.restore();
+	ctx.fillStyle='#f4f1e5';ctx.font='bold 10px system-ui';ctx.textAlign='center';ctx.fillText(Math.max(.1,b.time).toFixed(1),x,y+30);
+}
+function drawPlayer(p,t){
+	if(!p.alive)return;const a=Math.min(1,1-p.cooldown/p.moveTime),x=(p.fromX+(p.x-p.fromX)*a+.5)*T,y=(p.fromY+(p.y-p.fromY)*a+.5)*T,bob=p.cooldown>0?Math.sin(a*Math.PI)*-4:Math.sin(t*2)*1;
+	ctx.save();ctx.translate(x,y);rounded(-17,18,34,10,9,'#25362235');rounded(-13,9+bob,10,14,4,'#36403b');rounded(3,9+bob,10,14,4,'#36403b');rounded(-17,-4+bob,34,25,10,p.color);rounded(-23,2+bob,8,12,4,p.color);rounded(15,2+bob,8,12,4,p.color);rounded(-20,-28+bob,40,34,12,'#39423d');rounded(-20,-31+bob,40,34,12,'#f8f0d8');rounded(-15,-23+bob,30,19,7,'#38453b');rounded(-10,-19+bob,5,10,2,p.color);rounded(5,-19+bob,5,10,2,p.color);rounded(-6,-38+bob,12,10,4,p.color);ctx.fillStyle='#33443b';ctx.textAlign='center';ctx.font='bold 11px system-ui';ctx.fillText(String(p.id+1),0,11+bob);ctx.restore();
+}
+function render(t){
+	ctx.clearRect(0,0,canvas.width,canvas.height);for(let y=0;y<H;y++)for(let x=0;x<W;x++)drawTile(x,y,grid[y][x]);
+	for(const [key,left] of fire){const [x,y]=key.split(',').map(Number),px=x*T,py=y*T;ctx.globalAlpha=Math.min(1,left*5);rounded(px+2,py+2,60,60,12,'#f89949');rounded(px+9,py+8,46,47,14,'#ffd06e');rounded(px+19,py+18,26,28,10,'#fff2b0');ctx.globalAlpha=1;}
+	for(const i of items)drawItem(i,t);for(const b of bombs)drawBomb(b,t);for(const p of [...players].sort((a,b)=>a.y-b.y))drawPlayer(p,t);
+	for(const p of particles){ctx.globalAlpha=Math.max(0,p.life/p.max);rounded(p.x,p.y,p.size,p.size,1,p.color);}ctx.globalAlpha=1;
+}
+function frame(now){const dt=Math.min(.05,last?(now-last)/1000:0);last=now;update(dt);render(now/1000);requestAnimationFrame(frame);}
+function hold(id,direction){held[id]=held[id].filter(d=>d!==direction);held[id].push(direction);}
+function release(id,direction){held[id]=held[id].filter(d=>d!==direction);}
+document.addEventListener('keydown',e=>{
+	if(['SELECT','INPUT','TEXTAREA'].includes(e.target.tagName))return;
+	const handled=['Space','Enter','KeyP','Escape','KeyR',...Object.keys(bindings[0]),...Object.keys(bindings[1])].includes(e.code);if(!handled)return;
+	// Keep native keyboard activation available on the visible menu buttons.
+	if(e.target instanceof HTMLButtonElement&&['Space','Enter'].includes(e.code))return;
+	e.preventDefault();if(e.repeat)return;if(e.code==='KeyR'){round=1;reset();return;}if(e.code==='KeyP'||e.code==='Escape'){pause();return;}
+	if(phase!=='playing'||device!=='pc')return;for(let id=0;id<(mode==='story'?1:2);id++)if(bindings[id][e.code]){hold(id,bindings[id][e.code]);movePlayer(players[id],0);}if(e.code==='Space')placeBomb(0);if(e.code==='Enter'&&mode==='duel')placeBomb(1);
+});
+document.addEventListener('keyup',e=>{for(let id=0;id<2;id++)if(bindings[id][e.code])release(id,bindings[id][e.code]);});
+window.addEventListener('blur',()=>{held=[[],[]];if(phase==='playing')pause();});document.addEventListener('visibilitychange',()=>{if(document.hidden&&phase==='playing')pause();});
+$('start').addEventListener('click',()=>{if(phase==='paused')pause();else start();$('start').blur();});$('restart').addEventListener('click',()=>{round=1;reset();$('restart').blur();});
+$('sound').addEventListener('click',()=>{soundOn=!soundOn;$('sound').textContent=`サウンド ${soundOn?'ON':'OFF'}`;$('sound').setAttribute('aria-pressed',String(soundOn));unlockAudio();tone(550,.08);$('sound').blur();});
+document.querySelectorAll('.touch-controls button').forEach(button=>{
+	button.addEventListener('pointerdown',e=>{e.preventDefault();button.setPointerCapture(e.pointerId);if(phase!=='playing'||device!=='mobile')return;const id=Number(button.dataset.player);if(mode==='story'&&id===1)return;if(button.dataset.bomb)placeBomb(id);else {button.classList.add('active');hold(id,button.dataset.dir);movePlayer(players[id],0);}});
+	for(const event of ['pointerup','pointercancel','lostpointercapture'])button.addEventListener(event,()=>{button.classList.remove('active');if(button.dataset.dir)release(Number(button.dataset.player),button.dataset.dir);});
+});
+$('menu-toggle').addEventListener('click',()=>{const open=!$('menu-panel').classList.contains('open');$('menu-panel').classList.toggle('open',open);$('menu-toggle').setAttribute('aria-expanded',String(open));if(open&&phase==='playing')pause();$('menu-toggle').blur();});
+$('device-select').addEventListener('change',()=>{device=$('device-select').value;saveSettings();held=[[],[]];syncMenu();if(phase==='playing')pause();if(phase==='ready')reset();});
+$('mode-select').addEventListener('change',()=>{mode=$('mode-select').value;saveSettings();round=1;reset();});
+$('stage-select').addEventListener('change',()=>{const requested=Number($('stage-select').value);if(mode==='story'&&Number.isInteger(requested)&&requested>=1&&requested<=unlocked){stage=requested;reset();}});
+reset();requestAnimationFrame(frame);
+</script>
+</body>
+</html>
